@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">DrinkDex</string>
+    <string name="insert_drink_name">Nome do drink</string>
+    <string name="hint_drink_name">Digite o nome do Drink</string>
+    <string name="insert_recipe">Modo de Preparo</string>
+    <string name="hint_recipe">Digite o modo de Preparo</string>
+    <string name="insert_alcohol_amount">Teor Alcoolico</string>
+    <string name="hint_alcohol_amount">Digite o teor alcoolico</string>
+    <string name="insert_star">Nota</string>
+    <string name="hint_star">Digite a nota do Drink</string>
+    <string name="insert_title_page">DrinkDex</string>
+    <string name="insert_new_drink_button">Adicionar novo Drink</string>
+    <string name="insert_button_save_drink">Adicionar Drink</string>
+</resources>
