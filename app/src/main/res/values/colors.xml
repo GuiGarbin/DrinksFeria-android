@@ -6,5 +6,16 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="ambar">#FFD700</color>
+    <color name="golden">#FFC107</color>
+    <color name="copper">#CD7F32</color>
+
+    <color name="main_text">#FFFFFFFF</color>
+    <color name="background">#121212</color>
+    <color name="card_item_color">#212121</color>
+    <color name="card_constraint">#1F1F1F</color>
+    <color name="hint_color">#B0B0B0</color>
+    <color name="interactive">#2D2D2D</color>
+    <color name="back_button">#C5922F</color>
+
 </resources>
