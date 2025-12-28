@@ -17,7 +17,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/item_image"
+            android:id="@+id/itemImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
@@ -27,27 +27,36 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/itemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/main_text"
-            android:drawableEnd="@drawable/ic_right_arrow"
             android:layout_marginStart="16dp"
             tools:text="Caipirinha"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_image"
+            app:layout_constraintStart_toEndOf="@+id/itemImage"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-            android:id="@+id/txt_description_drink"
+            android:id="@+id/txtDescriptionDrink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/hint_color"
             android:ellipsize="end"
             android:maxLines="2"
             tools:text="Cachaça, limao, acucar, gelo"
-            app:layout_constraintStart_toStartOf="@id/item_name"
+            app:layout_constraintStart_toStartOf="@id/itemName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_name"
+            app:layout_constraintTop_toBottomOf="@id/itemName"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/arrowIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_right_arrow"
+            app:tint="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
