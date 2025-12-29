@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         this.criarDrinksFalsos();//cria os drinks
         drinkAdapter = new DrinkAdapter(listaDeDrinks);//cria variavel q carrega os drinks
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
-
     }
 
 
