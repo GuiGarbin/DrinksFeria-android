@@ -1,5 +1,6 @@
 package com.example.drinksdexjava;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,11 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
 
         holder.nome.setText(drinkAtual.getNome());
         holder.ingredientes.setText(drinkAtual.getIngrediente());
-        holder.foto.setImageResource(drinkAtual.getImage());
+        if(drinkAtual.getImage()!=null){
+            holder.foto.setImageURI(Uri.parse(drinkAtual.getImage()));
+        } else {
+            holder.foto.setImageResource(R.drawable.baseline_local_drink_24);
+        }
     }
 
     @Override

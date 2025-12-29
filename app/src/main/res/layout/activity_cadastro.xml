@@ -10,6 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/card_constraint"
+            android:src="@drawable/ic_arrow_back"
+            android:scaleType="center"
+            android:tint="@color/white"
+            android:layout_margin="8dp"
+            app:borderWidth="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <TextView
             android:id="@+id/drinkNameTextView"
             android:layout_width="0dp"

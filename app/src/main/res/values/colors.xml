@@ -9,6 +9,7 @@
     <color name="ambar">#FFD700</color>
     <color name="golden">#FFC107</color>
     <color name="copper">#CD7F32</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="main_text">#FFFFFFFF</color>
     <color name="background">#121212</color>
