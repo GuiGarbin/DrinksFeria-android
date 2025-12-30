@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/card_constraint"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/detailsPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_local_drink_24"/>
+
+    <TextView
+        android:id="@+id/detailsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/main_text"
+        tools:text="Nome do Drink"/>
+
+    <TextView
+        android:id="@+id/detailsIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Ingredientes aqui..."/>
+
+    <TextView
+        android:id="@+id/detailRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Descrição da receita aqui..."/>
+
+    <TextView
+        android:id="@+id/detailsAlcoholConten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Teor Alcoolico..."/>
+
+    <TextView
+        android:id="@+id/detailsReviewStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Avalicao do drink..."/>
+
+
+</LinearLayout>

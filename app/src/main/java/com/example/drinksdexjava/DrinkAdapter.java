@@ -11,33 +11,38 @@ import java.util.List;
 
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
-    private List<Drink> listaDrinks;
+    private List<Drink> listDrinks;
+    private final DrinkClickListener listener;
 
-    public DrinkAdapter(List<Drink> listaDrinks){
-        this.listaDrinks = listaDrinks;
+    public DrinkAdapter(List<Drink> listDrinks, DrinkClickListener listener){
+        this.listDrinks = listDrinks;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public DrinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item_drink_list = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drink_list, parent, false);
-        return new DrinkViewHolder(item_drink_list);
+        View itemDrinkList = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drink_list, parent, false);
+        return new DrinkViewHolder(itemDrinkList);
     }
     @Override
     public void onBindViewHolder(@NonNull DrinkViewHolder holder, int position) {
-        Drink drinkAtual = listaDrinks.get(position);
+        Drink thisDrink = listDrinks.get(position);
 
-        holder.nome.setText(drinkAtual.getNome());
-        holder.ingredientes.setText(drinkAtual.getIngrediente());
-        if(drinkAtual.getImage()!=null){
-            holder.foto.setImageURI(Uri.parse(drinkAtual.getImage()));
+        holder.name.setText(thisDrink.getName());
+        holder.ingredients.setText(thisDrink.getIngredients());
+        if(thisDrink.getPhoto()!=null){
+            holder.photo.setImageURI(Uri.parse(thisDrink.getPhoto()));
         } else {
-            holder.foto.setImageResource(R.drawable.baseline_local_drink_24);
+            holder.photo.setImageResource(R.drawable.baseline_local_drink_24);
         }
+        holder.itemView.setOnClickListener(v-> {
+            listener.onClickDrink(thisDrink);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return listaDrinks.size();
+        return listDrinks.size();
     }
 }

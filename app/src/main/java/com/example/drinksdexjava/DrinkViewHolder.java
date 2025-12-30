@@ -8,14 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DrinkViewHolder extends RecyclerView.ViewHolder {
-    public TextView nome;
-    public TextView ingredientes;
-    public ImageView foto;
+    public TextView name;
+    public TextView ingredients;
+    public ImageView photo;
 
     public DrinkViewHolder(@NonNull View itemView){
         super(itemView);
-        nome = itemView.findViewById(R.id.itemName);
-        ingredientes = itemView.findViewById(R.id.txtDescriptionDrink);
-        foto = itemView.findViewById(R.id.itemImage);
+        name = itemView.findViewById(R.id.itemName);
+        ingredients = itemView.findViewById(R.id.itemIngredients);
+        photo = itemView.findViewById(R.id.itemPhoto);
     }
 }

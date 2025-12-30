@@ -11,4 +11,6 @@
     <string name="insert_title_page">DrinkDex</string>
     <string name="insert_new_drink_button">Adicionar novo Drink</string>
     <string name="insert_button_save_drink">Adicionar Drink</string>
+    <string name="insert_ingredients">Lista de Ingredientes</string>
+    <string name="hint_ingredients">Digite os Ingredientes</string>
 </resources>

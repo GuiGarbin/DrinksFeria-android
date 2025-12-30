@@ -12,8 +12,8 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        ImageButton botaoVoltar = findViewById(R.id.button_back);
-        botaoVoltar.setOnClickListener(v->{
+        ImageButton buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(v->{
             finish();
         });
     }
