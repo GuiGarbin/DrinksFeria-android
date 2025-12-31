@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewDrinks;
     private DrinkAdapter drinkAdapter;
     private List<Drink> listDrinks;
+    ActivityResultLauncher<Intent> resultRegister;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);//inicializa o app
         setContentView(R.layout.activity_main);//chama a tela inicial
+        inicializeLauncher();
         this.criarDrinksFalsos();//cria os drinks
         configRecyclerView();//chama a funcao que configura a recycler view
         configButton();//chama a funcao que configura os botoes
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton butao = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
         butao.setOnClickListener(v -> {//clique no bbotao
             Intent intent = new Intent(this, CadastroActivity.class);//cria a possibilidade de mudar
-            startActivity(intent);//muda de pagina
+            resultRegister.launch(intent);
         });
     }
 
@@ -47,6 +53,28 @@ public class MainActivity extends AppCompatActivity {
         drinkAdapter = new DrinkAdapter(listDrinks, this::mostrarDetalhes);//cria variavel q carrega os drinks
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
     }
+
+    private void inicializeLauncher(){
+        resultRegister = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result-> {
+                    if(result.getResultCode()== MainActivity.RESULT_OK){
+                        Intent data = result.getData();
+
+                        if(data!=null){
+                            Drink newDrink = (Drink) data.getSerializableExtra("Drink cadastrado");
+                            saveDrink(newDrink);
+                        }
+                    }
+                }
+        );
+    }
+
+    private void saveDrink(Drink d){
+        listDrinks.add(d);
+        drinkAdapter.notifyDataSetChanged();
+    }
+
 
     private void mostrarDetalhes(Drink drink){
         BottomSheetDialog dialog = new BottomSheetDialog(this);

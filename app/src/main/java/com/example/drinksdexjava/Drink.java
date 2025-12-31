@@ -1,6 +1,8 @@
 package com.example.drinksdexjava;
 
-public class Drink {
+import java.io.Serializable;
+
+public class Drink implements Serializable {
     private String name;
     private String ingredients;
     private String recipe;

@@ -33,7 +33,7 @@
             android:textColor="@color/main_text"
             android:layout_marginStart="16dp"
             tools:text="Caipirinha"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/arrowIcon"
             app:layout_constraintStart_toEndOf="@+id/itemPhoto"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
@@ -45,7 +45,7 @@
             android:maxLines="2"
             tools:text="Cachaça, limao, acucar, gelo"
             app:layout_constraintStart_toStartOf="@id/itemName"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/arrowIcon"
             app:layout_constraintTop_toBottomOf="@id/itemName"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
