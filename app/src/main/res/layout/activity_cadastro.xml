@@ -192,7 +192,7 @@
             android:layout_marginEnd="48dp"
             android:layout_marginTop="10dp"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="@string/hint_star"
             app:layout_constraintTop_toBottomOf="@+id/reviewStarTextView"
             app:layout_constraintStart_toStartOf="parent"

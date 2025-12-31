@@ -19,6 +19,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText alcoholContent;
     private EditText starReview;
 
+
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         Button buttonSaveDrink = findViewById(R.id.saveButton);
         buttonSaveDrink.setOnClickListener(v->{
-            salvarDrink();
+            drinkSave();
         });
     }
 
@@ -47,11 +48,11 @@ public class CadastroActivity extends AppCompatActivity {
         starReview = findViewById(R.id.reviewStarEditText);
     }
 
-    private void salvarDrink(){
-        String nameD = name.getText().toString();
-        String ingredientsD = ingredients.getText().toString();
-        String recipeD = recipe.getText().toString();
-        String alcoholContentText = alcoholContent.getText().toString();
+    private void drinkSave(){
+        String nameD = name.getText().toString().trim();
+        String ingredientsD = ingredients.getText().toString().trim();
+        String recipeD = recipe.getText().toString().trim();
+        String alcoholContentText = alcoholContent.getText().toString().trim();
         double alcoholContentD = 0;
         if(!alcoholContentText.isEmpty()){
             alcoholContentD = Double.parseDouble(alcoholContentText);
@@ -62,8 +63,7 @@ public class CadastroActivity extends AppCompatActivity {
             starReviewD = Float.parseFloat(starReviwText);
         }
 
-        if(nameD.isEmpty()||ingredientsD.isEmpty()||recipeD.isEmpty()){
-            Toast.makeText(this, "Preencha os campos obrigatórios", Toast.LENGTH_SHORT).show();
+        if(!validateData()){
             return;
         }
 
@@ -76,4 +76,44 @@ public class CadastroActivity extends AppCompatActivity {
         finish();
     }
 
+    private boolean validateData(){
+        if(name.getText().toString().trim().isEmpty()){
+            name.setError("Campo obrigatório");
+            name.requestFocus();
+            return false;
+        }
+        if(ingredients.getText().toString().isEmpty()){
+            ingredients.setError("Campo obrigatório");
+            ingredients.requestFocus();
+            return false;
+        }
+        if(recipe.getText().toString().isEmpty()){
+            recipe.setError("Campo obrigatório");
+            recipe.requestFocus();
+            return false;
+        }
+        String alcoholText = alcoholContent.getText().toString().trim();
+        if (alcoholText.isEmpty()) {
+            alcoholContent.setError("Campo obrigatório"); // Ou defina como 0 se preferir
+            alcoholContent.requestFocus();
+            return false;
+        }
+        if(Double.parseDouble(alcoholContent.getText().toString())<0||Double.parseDouble(alcoholContent.getText().toString())>100){
+            alcoholContent.setError("Valor deve estar entre 0 e 100");
+            alcoholContent.requestFocus();
+            return false;
+        }
+        String starReviewText = starReview.getText().toString().trim();
+        if (starReviewText.isEmpty()) {
+            starReview.setError("Campo obrigatório"); // Ou defina como 0 se preferir
+            starReview.requestFocus();
+            return false;
+        }
+        if(Float.parseFloat(starReview.getText().toString())<0||Float.parseFloat(starReview.getText().toString())>5){
+            starReview.setError("Valor deve estar entre 0 e 5");
+            starReview.requestFocus();
+            return false;
+        }
+        return true;
+    }
 }

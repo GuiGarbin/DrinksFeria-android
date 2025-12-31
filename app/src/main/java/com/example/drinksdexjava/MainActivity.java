@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveDrink(Drink d){
         listDrinks.add(d);
-        drinkAdapter.notifyDataSetChanged();
+        drinkAdapter.notifyItemInserted(listDrinks.size()-1);
     }
 
 
