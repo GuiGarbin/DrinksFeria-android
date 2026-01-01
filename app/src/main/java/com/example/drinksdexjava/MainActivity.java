@@ -3,13 +3,10 @@ package com.example.drinksdexjava;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);//inicializa o app
         setContentView(R.layout.activity_main);//chama a tela inicial
         inicializeLauncher();
-        this.criarDrinksFalsos();//cria os drinks
+        listDrinks = DrinksRepository.getInstance().listDrink();
         configRecyclerView();//chama a funcao que configura a recycler view
         configButton();//chama a funcao que configura os botoes
     }
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewDrinks = findViewById(R.id.drinksRecyclerView);//vincula a variavel no recyclerView dos xml
         //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);//cria um formato pra lista
         recyclerViewDrinks.setLayoutManager(new LinearLayoutManager(this));//aplica a ordem criada
-        drinkAdapter = new DrinkAdapter(listDrinks, this::mostrarDetalhes);//cria variavel q carrega os drinks
+        drinkAdapter = new DrinkAdapter(listDrinks, this::showDetails);//cria variavel q carrega os drinks
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
     }
 
@@ -71,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveDrink(Drink d){
-        listDrinks.add(d);
+        DrinksRepository.getInstance().addDrink(d);
         drinkAdapter.notifyItemInserted(listDrinks.size()-1);
     }
 
 
-    private void mostrarDetalhes(Drink drink){
+    private void showDetails(Drink drink){
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(R.layout.layout_details_drink);
 

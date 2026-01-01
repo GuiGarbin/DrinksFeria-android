@@ -69,10 +69,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         Drink newDrink = new Drink(nameD, ingredientsD, recipeD, alcoholContentD, null, starReviewD);
 
-        Intent intentReturn = new Intent();
-        intentReturn.putExtra("Drink cadastrado", newDrink);
-
-        setResult(RESULT_OK, intentReturn);
+        DrinksRepository.getInstance().addDrink(newDrink);
         finish();
     }
 
@@ -92,7 +89,7 @@ public class CadastroActivity extends AppCompatActivity {
             recipe.requestFocus();
             return false;
         }
-        String alcoholText = alcoholContent.getText().toString().trim();
+        String alcoholText = alcoholContent.getText().toString().replace(",", ".").trim();
         if (alcoholText.isEmpty()) {
             alcoholContent.setError("Campo obrigatório"); // Ou defina como 0 se preferir
             alcoholContent.requestFocus();
@@ -103,7 +100,7 @@ public class CadastroActivity extends AppCompatActivity {
             alcoholContent.requestFocus();
             return false;
         }
-        String starReviewText = starReview.getText().toString().trim();
+        String starReviewText = starReview.getText().toString().replace(",", ".").trim();
         if (starReviewText.isEmpty()) {
             starReview.setError("Campo obrigatório"); // Ou defina como 0 se preferir
             starReview.requestFocus();
