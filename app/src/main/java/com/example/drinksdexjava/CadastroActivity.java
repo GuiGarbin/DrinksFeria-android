@@ -18,14 +18,16 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText recipe;
     private EditText alcoholContent;
     private EditText starReview;
-
+    private Drink drinkReceived = null;
+    private Button buttonSaveDrink;
 
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        configButton();
         inicializeComponents();
+        editDrink();
+        configButton();
     }
 
     private void configButton(){
@@ -34,10 +36,25 @@ public class CadastroActivity extends AppCompatActivity {
             finish();
         });
 
-        Button buttonSaveDrink = findViewById(R.id.saveButton);
         buttonSaveDrink.setOnClickListener(v->{
             drinkSave();
         });
+    }
+
+    private void editDrink(){
+        Intent intent = getIntent();
+        if(intent.hasExtra("editDrink")){
+            drinkReceived = (Drink) intent.getSerializableExtra("editDrink");
+            if(drinkReceived!=null){
+                name.setText(drinkReceived.getName());
+                ingredients.setText(drinkReceived.getIngredients());
+                recipe.setText(drinkReceived.getRecipe());
+                alcoholContent.setText((int) drinkReceived.getAlcoholContent());
+                starReview.setText((int) drinkReceived.getReviewStar());
+
+                buttonSaveDrink.setText("Atualizar");
+            }
+        }
     }
 
     private void inicializeComponents(){
@@ -46,9 +63,14 @@ public class CadastroActivity extends AppCompatActivity {
         recipe = findViewById(R.id.recipeEditText);
         alcoholContent = findViewById(R.id.alcoholContentEditText);
         starReview = findViewById(R.id.reviewStarEditText);
+        buttonSaveDrink = findViewById(R.id.saveButton);
     }
 
     private void drinkSave(){
+        if(!validateData()){
+            return;
+        }
+
         String nameD = name.getText().toString().trim();
         String ingredientsD = ingredients.getText().toString().trim();
         String recipeD = recipe.getText().toString().trim();
@@ -63,13 +85,22 @@ public class CadastroActivity extends AppCompatActivity {
             starReviewD = Float.parseFloat(starReviwText);
         }
 
-        if(!validateData()){
-            return;
+        if(drinkReceived!=null){
+            drinkReceived.setName(nameD);
+            drinkReceived.setIngredients(ingredientsD);
+            drinkReceived.setRecipe(recipeD);
+            drinkReceived.setAlcoholContent(alcoholContentD);
+            drinkReceived.setReviewStar(starReviewD);
+
+            DrinksRepository.getInstance().editDrink(drinkReceived);
+            Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
+        } else {
+            Drink newDrink = new Drink(nameD, ingredientsD, recipeD, alcoholContentD, null, starReviewD);
+
+            DrinksRepository.getInstance().addDrink(newDrink);
+            Toast.makeText(this, "Drink criado", Toast.LENGTH_SHORT).show();
+
         }
-
-        Drink newDrink = new Drink(nameD, ingredientsD, recipeD, alcoholContentD, null, starReviewD);
-
-        DrinksRepository.getInstance().addDrink(newDrink);
         finish();
     }
 

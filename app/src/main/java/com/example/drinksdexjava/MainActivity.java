@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configButton(){
-        FloatingActionButton butao = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
-        butao.setOnClickListener(v -> {//clique no bbotao
+        FloatingActionButton addDrinkButao = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
+        addDrinkButao.setOnClickListener(v -> {//clique no bbotao
             Intent intent = new Intent(this, CadastroActivity.class);//cria a possibilidade de mudar
             resultRegister.launch(intent);
         });
@@ -82,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
     private void showDetails(Drink drink){
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(R.layout.layout_details_drink);
+
+        FloatingActionButton editbutton = findViewById(R.id.editButton);
+        editbutton.setOnClickListener(v->{
+            Intent intent = new Intent();
+            intent.putExtra("editDrink", drink);
+            resultRegister.launch(intent);
+            dialog.dismiss();
+        });
 
         TextView name = dialog.findViewById(R.id.detailsName);
         TextView ingredients = dialog.findViewById(R.id.detailsIngredients);

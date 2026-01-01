@@ -27,11 +27,24 @@ public class DrinksRepository {
         return null;
     }
 
+    public void editDrink(Drink drinkModified){
+        for(int i = 0; i < listDrinks.size(); i++){
+            if(listDrinks.get(i).getId() == drinkModified.getId()){
+                listDrinks.set(i, drinkModified);
+                return;
+            }
+        }
+    }
+
     public static DrinksRepository getInstance(){
         if(instance==null){
             instance = new DrinksRepository();
         }
         return instance;
+    }
+
+    public int getSize(){
+        return listDrinks.size() + 1;
     }
 
     private void criarDrinksFalsos() {

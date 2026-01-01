@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/card_constraint"
     android:orientation="vertical"
     android:padding="16dp"
@@ -13,7 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/baseline_local_drink_24"/>
+        android:src="@drawable/baseline_local_drink_24"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_edit"
+        android:backgroundTint="@color/back_button"
+        android:tint="@color/card_item_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/detailsName"
@@ -22,7 +36,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/main_text"
-        tools:text="Nome do Drink"/>
+        tools:text="Nome do Drink"
+        app:layout_constraintTop_toBottomOf="@+id/detailsPhoto"/>
 
     <TextView
         android:id="@+id/detailsIngredients"
@@ -30,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
-        tools:text="Ingredientes aqui..."/>
+        tools:text="Ingredientes aqui..."
+        app:layout_constraintTop_toBottomOf="@+id/detailsName"/>
 
     <TextView
         android:id="@+id/detailRecipe"
@@ -38,7 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
-        tools:text="Descrição da receita aqui..."/>
+        tools:text="Descrição da receita aqui..."
+        app:layout_constraintTop_toBottomOf="@+id/detailsIngredients"/>
 
     <TextView
         android:id="@+id/detailsAlcoholConten"
@@ -46,7 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
-        tools:text="Teor Alcoolico..."/>
+        tools:text="Teor Alcoolico..."
+        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"/>
 
     <TextView
         android:id="@+id/detailsReviewStar"
@@ -54,7 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
-        tools:text="Avalicao do drink..."/>
+        tools:text="Avalicao do drink..."
+        app:layout_constraintTop_toBottomOf="@+id/detailsAlcoholConten"/>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
