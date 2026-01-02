@@ -12,8 +12,20 @@ public class Drink implements Serializable {
     private float reviewStar;
 
     // Construtor
-    public Drink(String name, String ingredients, String recipe, double alcoholContent, String photo, float reviewStar) {
-        this.id = DrinksRepository.getInstance().getSize();
+    public Drink(int id, String name, String ingredients, String recipe, double alcoholContent, String photo, float reviewStar) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.recipe = recipe;
+        this.alcoholContent = alcoholContent;
+        this.photo = photo;
+        this.reviewStar = reviewStar;
+    }
+
+    //CONSTRUTOR PRA TESTE DA LISTA INICIAL DE DRINKS
+    //EXCLUIR NA VERSAO FINAL
+    public Drink(int id, String name, String ingredients, String recipe, double alcoholContent, float reviewStar) {
+        this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.recipe = recipe;

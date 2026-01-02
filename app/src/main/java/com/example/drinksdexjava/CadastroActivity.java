@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,15 +23,33 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText recipe;
     private EditText alcoholContent;
     private EditText starReview;
+    private ImageView imagePhotoDrink;
     private Drink drinkReceived = null;
     private Button buttonSaveDrink;
+    private String stringURISave = null;
+    private ActivityResultLauncher<String> launcherGalery;
 
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         inicializeComponents();
+        inicializeLauncherPhoto();
         editDrink();
+        imagePhotoDrink.setOnClickListener(v-> {
+            String[] options = {"Tirar Foto", "Escolher da Galeria"};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Definir Imagem");
+            builder.setItems(options, (dialog, which) -> {
+                if (which == 0) {
+                    // Lógica da Câmera (implementaremos depois)
+                } else if (which == 1) {
+                    launcherGalery.launch("image/*");
+                }
+            });
+            builder.show();
+        });
         configButton();
     }
 
@@ -41,6 +64,19 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
+    private void inicializeLauncherPhoto(){
+        launcherGalery = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri->{
+                    if(uri!=null) {
+                        imagePhotoDrink.setImageURI(uri);
+                        stringURISave = uri.toString();
+                        getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
+                }
+        );
+    }
+
     private void editDrink(){
         Intent intent = getIntent();
         if(intent.hasExtra("editDrink")){
@@ -49,8 +85,8 @@ public class CadastroActivity extends AppCompatActivity {
                 name.setText(drinkReceived.getName());
                 ingredients.setText(drinkReceived.getIngredients());
                 recipe.setText(drinkReceived.getRecipe());
-                alcoholContent.setText((int) drinkReceived.getAlcoholContent());
-                starReview.setText((int) drinkReceived.getReviewStar());
+                alcoholContent.setText(String.valueOf(drinkReceived.getAlcoholContent()));
+                starReview.setText(String.valueOf(drinkReceived.getReviewStar()));
 
                 buttonSaveDrink.setText("Atualizar");
             }
@@ -64,6 +100,7 @@ public class CadastroActivity extends AppCompatActivity {
         alcoholContent = findViewById(R.id.alcoholContentEditText);
         starReview = findViewById(R.id.reviewStarEditText);
         buttonSaveDrink = findViewById(R.id.saveButton);
+        imagePhotoDrink = findViewById(R.id.addPhotoButton);
     }
 
     private void drinkSave(){
@@ -95,7 +132,8 @@ public class CadastroActivity extends AppCompatActivity {
             DrinksRepository.getInstance().editDrink(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
         } else {
-            Drink newDrink = new Drink(nameD, ingredientsD, recipeD, alcoholContentD, null, starReviewD);
+            int id = DrinksRepository.getInstance().getSize();
+            Drink newDrink = new Drink(id, nameD, ingredientsD, recipeD, alcoholContentD, stringURISave, starReviewD);
 
             DrinksRepository.getInstance().addDrink(newDrink);
             Toast.makeText(this, "Drink criado", Toast.LENGTH_SHORT).show();
@@ -105,6 +143,11 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     private boolean validateData(){
+        if(stringURISave==null){
+            Toast.makeText(this,"Selecione uma imagem para o drink", Toast.LENGTH_SHORT).show();
+            imagePhotoDrink.requestFocus();
+            return false;
+        }
         if(name.getText().toString().trim().isEmpty()){
             name.setError("Campo obrigatório");
             name.requestFocus();

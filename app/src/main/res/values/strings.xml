@@ -13,4 +13,5 @@
     <string name="insert_button_save_drink">Adicionar Drink</string>
     <string name="insert_ingredients">Lista de Ingredientes</string>
     <string name="hint_ingredients">Digite os Ingredientes</string>
+    <string name="pag_register">Adição de Drinks</string>
 </resources>

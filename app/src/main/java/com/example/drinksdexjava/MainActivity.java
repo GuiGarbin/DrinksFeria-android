@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(R.layout.layout_details_drink);
 
-        FloatingActionButton editbutton = findViewById(R.id.editButton);
+        FloatingActionButton editbutton = dialog.findViewById(R.id.editButton);
         editbutton.setOnClickListener(v->{
-            Intent intent = new Intent();
+            Intent intent = new Intent(this, CadastroActivity.class);
             intent.putExtra("editDrink", drink);
             resultRegister.launch(intent);
             dialog.dismiss();
@@ -94,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         TextView name = dialog.findViewById(R.id.detailsName);
         TextView ingredients = dialog.findViewById(R.id.detailsIngredients);
         TextView recipe = dialog.findViewById(R.id.detailRecipe);
-        ImageView photo = dialog.findViewById(R.id.detailsPhoto);
         TextView alcoholContent = dialog.findViewById(R.id.detailsAlcoholConten);
         TextView reviewStar = dialog.findViewById(R.id.detailsReviewStar);
+        ImageView photo = dialog.findViewById(R.id.detailsPhoto);
 
         name.setText(drink.getName());
         ingredients.setText(drink.getIngredients());
