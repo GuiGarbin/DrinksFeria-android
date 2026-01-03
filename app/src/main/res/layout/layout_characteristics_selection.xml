@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/alcoholTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/main_text"
+        android:text="@string/txt_alcohol_type_select"
+        />
+
+    <Spinner
+        android:id="@+id/alcoholTypeSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="16dp"
+        />
+
+    <TextView
+        android:id="@+id/categoryTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/main_text"
+        android:text="@string/txt_category_type_select"
+        />
+
+    <Spinner
+        android:id="@+id/categoryTypeSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="16dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tempTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/main_text"
+        android:text="@string/txt_temp_type_select"
+        />
+
+    <Spinner
+        android:id="@+id/tempTypeSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="16dp"
+
+        />
+
+</LinearLayout>

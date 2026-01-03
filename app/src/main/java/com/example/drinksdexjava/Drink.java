@@ -3,6 +3,7 @@ package com.example.drinksdexjava;
 import java.io.Serializable;
 
 public class Drink implements Serializable {
+
     private int id;
     private String name;
     private String ingredients;
@@ -10,6 +11,10 @@ public class Drink implements Serializable {
     private double alcoholContent;
     private String photo;
     private float reviewStar;
+
+    private TypeAlcoholDrink typeAlcoholDrink;
+    private TypeCategoryDrink typeCategoryDrink;
+    private TypeTempDrink typeTempDrink;
 
     // Construtor
     public Drink(int id, String name, String ingredients, String recipe, double alcoholContent, String photo, float reviewStar) {

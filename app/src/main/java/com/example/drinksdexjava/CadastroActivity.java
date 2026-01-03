@@ -2,6 +2,7 @@ package com.example.drinksdexjava;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,19 @@ public class CadastroActivity extends AppCompatActivity {
         inicializeComponents();
         inicializeLauncherPhoto();
         editDrink();
+        configButton();
+    }
+
+    private void configButton(){
+        ImageButton buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(v->{
+            finish();
+        });
+
+        buttonSaveDrink.setOnClickListener(v->{
+            drinkSave();
+        });
+
         imagePhotoDrink.setOnClickListener(v-> {
             String[] options = {"Tirar Foto", "Escolher da Galeria"};
 
@@ -50,32 +64,9 @@ public class CadastroActivity extends AppCompatActivity {
             });
             builder.show();
         });
-        configButton();
     }
 
-    private void configButton(){
-        ImageButton buttonBack = findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(v->{
-            finish();
-        });
 
-        buttonSaveDrink.setOnClickListener(v->{
-            drinkSave();
-        });
-    }
-
-    private void inicializeLauncherPhoto(){
-        launcherGalery = registerForActivityResult(
-                new ActivityResultContracts.GetContent(),
-                uri->{
-                    if(uri!=null) {
-                        imagePhotoDrink.setImageURI(uri);
-                        stringURISave = uri.toString();
-                        getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    }
-                }
-        );
-    }
 
     private void editDrink(){
         Intent intent = getIntent();
@@ -88,20 +79,17 @@ public class CadastroActivity extends AppCompatActivity {
                 alcoholContent.setText(String.valueOf(drinkReceived.getAlcoholContent()));
                 starReview.setText(String.valueOf(drinkReceived.getReviewStar()));
 
+                if(drinkReceived.getPhoto()!=null){
+                    imagePhotoDrink.setImageURI(Uri.parse(drinkReceived.getPhoto()));
+                    stringURISave = drinkReceived.getPhoto();
+                }
+
                 buttonSaveDrink.setText("Atualizar");
             }
         }
     }
 
-    private void inicializeComponents(){
-        name = findViewById(R.id.drinkNameEditText);
-        ingredients = findViewById(R.id.ingredientsEditText);
-        recipe = findViewById(R.id.recipeEditText);
-        alcoholContent = findViewById(R.id.alcoholContentEditText);
-        starReview = findViewById(R.id.reviewStarEditText);
-        buttonSaveDrink = findViewById(R.id.saveButton);
-        imagePhotoDrink = findViewById(R.id.addPhotoButton);
-    }
+
 
     private void drinkSave(){
         if(!validateData()){
@@ -128,6 +116,7 @@ public class CadastroActivity extends AppCompatActivity {
             drinkReceived.setRecipe(recipeD);
             drinkReceived.setAlcoholContent(alcoholContentD);
             drinkReceived.setReviewStar(starReviewD);
+            drinkReceived.setPhoto(stringURISave);
 
             DrinksRepository.getInstance().editDrink(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
@@ -153,12 +142,12 @@ public class CadastroActivity extends AppCompatActivity {
             name.requestFocus();
             return false;
         }
-        if(ingredients.getText().toString().isEmpty()){
+        if(ingredients.getText().toString().trim().isEmpty()){
             ingredients.setError("Campo obrigatório");
             ingredients.requestFocus();
             return false;
         }
-        if(recipe.getText().toString().isEmpty()){
+        if(recipe.getText().toString().trim().isEmpty()){
             recipe.setError("Campo obrigatório");
             recipe.requestFocus();
             return false;
@@ -186,5 +175,28 @@ public class CadastroActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void inicializeComponents(){
+        name = findViewById(R.id.drinkNameEditText);
+        ingredients = findViewById(R.id.ingredientsEditText);
+        recipe = findViewById(R.id.recipeEditText);
+        alcoholContent = findViewById(R.id.alcoholContentEditText);
+        starReview = findViewById(R.id.reviewStarEditText);
+        buttonSaveDrink = findViewById(R.id.saveButton);
+        imagePhotoDrink = findViewById(R.id.addPhotoButton);
+    }
+
+    private void inicializeLauncherPhoto(){
+        launcherGalery = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri->{
+                    if(uri!=null) {
+                        imagePhotoDrink.setImageURI(uri);
+                        stringURISave = uri.toString();
+                        getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
+                }
+        );
     }
 }

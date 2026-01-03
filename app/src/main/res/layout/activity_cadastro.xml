@@ -7,7 +7,7 @@
     android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -45,14 +45,14 @@
             android:layout_width="120sp"
             android:layout_height="120sp"
             android:scaleType="centerCrop"
+            android:background="@null"
             android:src="@drawable/ic_photo"
             android:layout_marginStart="42dp"
             android:layout_marginEnd="42dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerRegister"
-            />
-
+        />
 
         <TextView
             android:id="@+id/drinkNameTextView"
@@ -211,22 +211,39 @@
             android:id="@+id/reviewStarEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
             android:backgroundTint="@color/interactive"
-            android:textColorHint="@color/hint_color"
             android:drawableStart="@drawable/ic_star_rate"
             android:drawablePadding="12dp"
             android:drawableTint="@color/golden"
-            android:textSize="20sp"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:hint="@string/hint_star"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
-            android:hint="@string/hint_star"
-            app:layout_constraintTop_toBottomOf="@+id/reviewStarTextView"
+            android:textColorHint="@color/hint_color"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviewStarTextView" />
+
+        <Button
+            android:id="@+id/typeDrinkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/main_text"
+            android:textSize="26sp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/insert_types_drink"
+            app:layout_constraintTop_toBottomOf="@+id/reviewStarEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
 
         <Button
             android:id="@+id/saveButton"
@@ -242,7 +259,7 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reviewStarEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/typeDrinkButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

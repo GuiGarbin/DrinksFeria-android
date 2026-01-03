@@ -13,5 +13,9 @@
     <string name="insert_button_save_drink">Adicionar Drink</string>
     <string name="insert_ingredients">Lista de Ingredientes</string>
     <string name="hint_ingredients">Digite os Ingredientes</string>
-    <string name="pag_register">Adição de Drinks</string>
+    <string name="pag_register">Cadastro de Drinks</string>
+    <string name="insert_types_drink">Selecione catagorias do drink</string>
+    <string name="txt_alcohol_type_select">Selecione a base alcoolica do drink</string>
+    <string name="txt_category_type_select">Selecione o tipo do drink</string>
+    <string name="txt_temp_type_select">Selecione a temperatura do drink</string>
 </resources>
