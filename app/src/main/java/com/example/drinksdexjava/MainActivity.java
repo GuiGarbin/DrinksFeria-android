@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void configButton(){
         FloatingActionButton addDrinkButao = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
         addDrinkButao.setOnClickListener(v -> {//clique no bbotao
-            Intent intent = new Intent(this, CadastroActivity.class);//cria a possibilidade de mudar
+            Intent intent = new Intent(MainActivity.this, CadastroActivity.class);//cria a possibilidade de mudar
             resultRegister.launch(intent);
         });
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="option_alcohol">
+        <item>Vodka</item>
+        <item>Gin</item>
+        <item>Rum</item>
+        <item>Tequila</item>
+        <item>Whisky</item>
+        <item>Cachaca</item>
+        <item>Vinho</item>
+        <item>Sem_Alcool</item>
+    </string-array>
+    <string-array name="option_temp">
+        <item>Hot</item>
+        <item>Cold</item>
+        <item>Frozen</item>
+        <item>Room</item>
+    </string-array>
+    <string-array name="option_size">
+        <item>Long_Drink</item>
+        <item>Short_Drink</item>
+        <item>Shot</item>
+        <item>Coquetel</item>
+    </string-array>
+</resources>

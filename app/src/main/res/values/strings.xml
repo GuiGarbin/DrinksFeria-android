@@ -18,4 +18,5 @@
     <string name="txt_alcohol_type_select">Selecione a base alcoolica do drink</string>
     <string name="txt_category_type_select">Selecione o tipo do drink</string>
     <string name="txt_temp_type_select">Selecione a temperatura do drink</string>
+    <string name="txt_save_categories">Salve categorias</string>
 </resources>
