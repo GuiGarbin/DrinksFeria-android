@@ -1,22 +1,31 @@
 <resources>
-    <string name="app_name">DrinkDex</string>
-    <string name="insert_drink_name">Nome do drink</string>
+    //headers das paginas diferentes
+    <string name="header_app_name">DrinkDex</string>
+    <string name="header_pag_register">Cadastro de Drinks</string>
+
+    //text view da "cadastro"
+    <string name="text_view_drink_name">Nome do drink</string>
+    <string name="text_view_ingredients">Lista de Ingredientes</string>
+    <string name="text_view_recipe">Modo de Preparo</string>
+    <string name="text_view_alcohol_amount">Teor Alcoolico</string>
+    <string name="text_view_star">Nota</string>
+
+    //hints da "cadastro"
     <string name="hint_drink_name">Digite o nome do Drink</string>
-    <string name="insert_recipe">Modo de Preparo</string>
-    <string name="hint_recipe">Digite o modo de Preparo</string>
-    <string name="insert_alcohol_amount">Teor Alcoolico</string>
-    <string name="hint_alcohol_amount">Digite o teor alcoolico</string>
-    <string name="insert_star">Nota</string>
-    <string name="hint_star">Digite a nota do Drink</string>
-    <string name="insert_title_page">DrinkDex</string>
-    <string name="insert_new_drink_button">Adicionar novo Drink</string>
-    <string name="insert_button_save_drink">Adicionar Drink</string>
-    <string name="insert_ingredients">Lista de Ingredientes</string>
     <string name="hint_ingredients">Digite os Ingredientes</string>
-    <string name="pag_register">Cadastro de Drinks</string>
-    <string name="insert_types_drink">Selecione catagorias do drink</string>
-    <string name="txt_alcohol_type_select">Selecione a base alcoolica do drink</string>
-    <string name="txt_category_type_select">Selecione o tipo do drink</string>
-    <string name="txt_temp_type_select">Selecione a temperatura do drink</string>
-    <string name="txt_save_categories">Salve categorias</string>
+    <string name="hint_recipe">Digite o modo de Preparo</string>
+    <string name="hint_alcohol_amount">Digite o teor alcoolico</string>
+    <string name="hint_star">Digite a nota do Drink</string>
+
+    //botoes do proj
+    <string name="description_new_drink_button">Adicionar novo Drink</string>
+    <string name="button_save_drink">Adicionar Drink</string>
+    <string name="button_save_categories">Salve categorias</string>
+
+    //textos da dialog de categorias
+    <string name="text_view_types_drink">Selecione catagorias do drink</string>
+    <string name="select_alcohol_type">Selecione a base alcoolica do drink</string>
+    <string name="select_category_type">Selecione o tipo do drink</string>
+    <string name="select_temp_type">Selecione a temperatura do drink</string>
+
 </resources>

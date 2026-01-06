@@ -21,24 +21,24 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewDrinks;
     private DrinkAdapter drinkAdapter;
     private List<Drink> listDrinks;
-    ActivityResultLauncher<Intent> resultRegister;
+    ActivityResultLauncher<Intent> addDrinkLauncher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);//inicializa o app
         setContentView(R.layout.activity_main);//chama a tela inicial
-        inicializeLauncher();
+        initializeLauncher();
         listDrinks = DrinksRepository.getInstance().listDrink();
         configRecyclerView();//chama a funcao que configura a recycler view
         configButton();//chama a funcao que configura os botoes
     }
 
     private void configButton(){
-        FloatingActionButton addDrinkButao = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
-        addDrinkButao.setOnClickListener(v -> {//clique no bbotao
+        FloatingActionButton fabAddDrink = findViewById(R.id.buttonAddDrink);//adiciona o botao pra mudar de pagina
+        fabAddDrink.setOnClickListener(v -> {//clique no bbotao
             Intent intent = new Intent(MainActivity.this, CadastroActivity.class);//cria a possibilidade de mudar
-            resultRegister.launch(intent);
+            addDrinkLauncher.launch(intent);
         });
     }
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
     }
 
-    private void inicializeLauncher(){
-        resultRegister = registerForActivityResult(
+    private void initializeLauncher(){
+        addDrinkLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result-> {
                     if(result.getResultCode()== MainActivity.RESULT_OK){
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         editbutton.setOnClickListener(v->{
             Intent intent = new Intent(this, CadastroActivity.class);
             intent.putExtra("editDrink", drink);
-            resultRegister.launch(intent);
+            addDrinkLauncher.launch(intent);
             dialog.dismiss();
         });
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             photo.setImageResource(R.drawable.baseline_local_drink_24);
         }
         alcoholContent.setText(String.format("%.1f%% vol", drink.getAlcoholContent()));
-        reviewStar.setText(String.format("%.1f review", drink.getReviewStar()));
+        reviewStar.setText(String.format("%.1f review", drink.getRating()));
         dialog.show();
     }
 }

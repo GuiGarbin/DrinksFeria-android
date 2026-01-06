@@ -8,7 +8,7 @@ public class DrinksRepository {
 
     private DrinksRepository(){
         listDrinks = new ArrayList<>();
-        criarDrinksFalsos();
+        createFakeDrinks();
 
     }
 
@@ -20,7 +20,7 @@ public class DrinksRepository {
         return listDrinks;
     }
 
-    public Drink searchForIndex(int indice){
+    public Drink getDrinkByIndex(int indice){
         if(indice>=0 && indice<listDrinks.size()){
             return listDrinks.get(indice);
         }
@@ -47,7 +47,7 @@ public class DrinksRepository {
         return listDrinks.size() + 1;
     }
 
-    private void criarDrinksFalsos() {
+    private void createFakeDrinks() {
         listDrinks = new ArrayList<>();
         listDrinks.add(new Drink(1,"Caipirinha", "Limão e Cachaça","", 20, 4));
         listDrinks.add(new Drink(2,"Mojito", "Rum e Hortelã", "",15,  4));

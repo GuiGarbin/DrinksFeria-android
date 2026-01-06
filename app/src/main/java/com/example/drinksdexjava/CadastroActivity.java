@@ -1,6 +1,5 @@
 package com.example.drinksdexjava;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,13 +12,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText name;
@@ -30,18 +27,18 @@ public class CadastroActivity extends AppCompatActivity {
     private ImageView imagePhotoDrink;
     private Drink drinkReceived = null;
     private Button buttonSaveDrink;
-    private String stringURISave = null;
-    private ActivityResultLauncher<String> launcherGalery;
-    private TypeAlcoholDrink categoriaBase;
-    private TypeTempDrink categoriaOcasiao;
-    private TypeCategoryDrink categoriaTamanho;
+    private String currentURIPhoto = null;
+    private ActivityResultLauncher<String> launcherGallery;
+    private AlcoholBase selectedAlcoholType;
+    private DrinkTemperature selectedTempType;
+    private DrinkCategory selectedCategoryType;
 
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        inicializeComponents();
-        inicializeLauncherPhoto();
+        initializeComponents();
+        initializeLauncherPhoto();
         editDrink();
         configButton();
     }
@@ -53,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
         buttonSaveDrink.setOnClickListener(v->{
-            drinkSave();
+            saveDrink();
         });
 
         imagePhotoDrink.setOnClickListener(v-> {
@@ -65,7 +62,7 @@ public class CadastroActivity extends AppCompatActivity {
                 if (which == 0) {
                     // Lógica da Câmera (implementaremos depois)
                 } else if (which == 1) {
-                    launcherGalery.launch("image/*");
+                    launcherGallery.launch("image/*");
                 }
             });
             builder.show();
@@ -84,15 +81,15 @@ public class CadastroActivity extends AppCompatActivity {
         Spinner spinTemp = dialog.findViewById(R.id.tempTypeSelect);
         Spinner spinCategory = dialog.findViewById(R.id.categoryTypeSelect);
 
-        configurarSpinner(spinAlcohol, TypeAlcoholDrink.values());
-        configurarSpinner(spinTemp, TypeTempDrink.values());
-        configurarSpinner(spinCategory, TypeCategoryDrink.values());
+        configSpinner(spinAlcohol, AlcoholBase.values());
+        configSpinner(spinTemp, DrinkTemperature.values());
+        configSpinner(spinCategory, DrinkCategory.values());
 
         Button buttonSaveCategories = dialog.findViewById(R.id.addCategoryButton);
         buttonSaveCategories.setOnClickListener(v-> {
-            categoriaBase = (TypeAlcoholDrink) spinAlcohol.getSelectedItem();
-            categoriaTamanho = (TypeCategoryDrink) spinCategory.getSelectedItem();
-            categoriaOcasiao = (TypeTempDrink) spinTemp.getSelectedItem();
+            selectedAlcoholType = (AlcoholBase) spinAlcohol.getSelectedItem();
+            selectedCategoryType = (DrinkCategory) spinCategory.getSelectedItem();
+            selectedTempType = (DrinkTemperature) spinTemp.getSelectedItem();
 
             dialog.dismiss();
         });
@@ -109,11 +106,11 @@ public class CadastroActivity extends AppCompatActivity {
                 ingredients.setText(drinkReceived.getIngredients());
                 recipe.setText(drinkReceived.getRecipe());
                 alcoholContent.setText(String.valueOf(drinkReceived.getAlcoholContent()));
-                starReview.setText(String.valueOf(drinkReceived.getReviewStar()));
+                starReview.setText(String.valueOf(drinkReceived.getRating()));
 
                 if(drinkReceived.getPhoto()!=null){
                     imagePhotoDrink.setImageURI(Uri.parse(drinkReceived.getPhoto()));
-                    stringURISave = drinkReceived.getPhoto();
+                    currentURIPhoto = drinkReceived.getPhoto();
                 }
 
                 buttonSaveDrink.setText("Atualizar");
@@ -121,7 +118,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 
-    private void drinkSave(){
+    private void saveDrink(){
         if(!validateData()){
             return;
         }
@@ -145,8 +142,8 @@ public class CadastroActivity extends AppCompatActivity {
             drinkReceived.setIngredients(ingredientsD);
             drinkReceived.setRecipe(recipeD);
             drinkReceived.setAlcoholContent(alcoholContentD);
-            drinkReceived.setReviewStar(starReviewD);
-            drinkReceived.setPhoto(stringURISave);
+            drinkReceived.setRating(starReviewD);
+            drinkReceived.setPhoto(currentURIPhoto);
 
             DrinksRepository.getInstance().editDrink(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
@@ -157,11 +154,11 @@ public class CadastroActivity extends AppCompatActivity {
                     ingredientsD,
                     recipeD,
                     alcoholContentD,
-                    stringURISave,
+                    currentURIPhoto,
                     starReviewD,
-                    categoriaBase,
-                    categoriaOcasiao,
-                    categoriaTamanho
+                    selectedAlcoholType,
+                    selectedTempType,
+                    selectedCategoryType
             );
 
             DrinksRepository.getInstance().addDrink(newDrink);
@@ -172,7 +169,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     private boolean validateData(){
-        if(stringURISave==null){
+        if(currentURIPhoto ==null){
             Toast.makeText(this,"Selecione uma imagem para o drink", Toast.LENGTH_SHORT).show();
             imagePhotoDrink.requestFocus();
             return false;
@@ -217,7 +214,7 @@ public class CadastroActivity extends AppCompatActivity {
         return true;
     }
 
-    private void inicializeComponents(){
+    private void initializeComponents(){
         name = findViewById(R.id.drinkNameEditText);
         ingredients = findViewById(R.id.ingredientsEditText);
         recipe = findViewById(R.id.recipeEditText);
@@ -227,20 +224,20 @@ public class CadastroActivity extends AppCompatActivity {
         imagePhotoDrink = findViewById(R.id.addPhotoButton);
     }
 
-    private void inicializeLauncherPhoto(){
-        launcherGalery = registerForActivityResult(
+    private void initializeLauncherPhoto(){
+        launcherGallery = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 uri->{
                     if(uri!=null) {
                         imagePhotoDrink.setImageURI(uri);
-                        stringURISave = uri.toString();
+                        currentURIPhoto = uri.toString();
                         getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     }
                 }
         );
     }
 
-    private <T> void configurarSpinner(Spinner spinner, T[] valores) {
+    private <T> void configSpinner(Spinner spinner, T[] valores) {
         ArrayAdapter<T> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valores);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

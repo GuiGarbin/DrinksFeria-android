@@ -1,6 +1,6 @@
 package com.example.drinksdexjava;
 
-public enum TypeTempDrink {
+public enum DrinkTemperature {
     HOT("Hot"),
     COLD("Cold"),
     FROZEN("Frozen"),
@@ -8,7 +8,7 @@ public enum TypeTempDrink {
 
     private final String txtScreen;
 
-    TypeTempDrink(String txtScreen) {
+    DrinkTemperature(String txtScreen) {
         this.txtScreen = txtScreen;
     }
 

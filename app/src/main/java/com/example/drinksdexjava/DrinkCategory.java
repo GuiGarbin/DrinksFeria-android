@@ -1,6 +1,6 @@
 package com.example.drinksdexjava;
 
-public enum TypeCategoryDrink {
+public enum DrinkCategory {
     LONG_DRINK("Long Drink"),
     SHORT_DRINK("Short Drink"),
     SHOT("Shot"),
@@ -8,7 +8,7 @@ public enum TypeCategoryDrink {
 
     private final String txtScreen;
 
-    TypeCategoryDrink(String txtScreen) {
+    DrinkCategory(String txtScreen) {
         this.txtScreen = txtScreen;
     }
 

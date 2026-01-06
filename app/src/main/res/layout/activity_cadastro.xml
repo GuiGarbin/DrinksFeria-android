@@ -32,7 +32,7 @@
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
             android:textColor="@color/main_text"
-            android:text="@string/pag_register"
+            android:text="@string/header_pag_register"
             android:gravity="center"
             android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_drink_name"
+            android:text="@string/text_view_drink_name"
             app:layout_constraintTop_toBottomOf="@+id/addPhotoButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -99,7 +99,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_ingredients"
+            android:text="@string/text_view_ingredients"
             app:layout_constraintTop_toBottomOf="@+id/drinkNameEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -134,7 +134,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_recipe"
+            android:text="@string/text_view_recipe"
             app:layout_constraintTop_toBottomOf="@+id/ingredientsEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -169,7 +169,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_alcohol_amount"
+            android:text="@string/text_view_alcohol_amount"
             app:layout_constraintTop_toBottomOf="@+id/recipeEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -202,7 +202,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_star"
+            android:text="@string/text_view_star"
             app:layout_constraintTop_toBottomOf="@+id/alcoholContentEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -239,7 +239,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginTop="16dp"
-            android:text="@string/insert_types_drink"
+            android:text="@string/text_view_types_drink"
             app:layout_constraintTop_toBottomOf="@+id/reviewStarEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -253,7 +253,7 @@
             android:backgroundTint="@color/back_button"
             android:drawableStart="@drawable/is_save"
             android:drawableTint="@color/black"
-            android:text="@string/insert_button_save_drink"
+            android:text="@string/button_save_drink"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="16dp"
