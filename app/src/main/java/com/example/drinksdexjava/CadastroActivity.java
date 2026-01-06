@@ -3,12 +3,14 @@ package com.example.drinksdexjava;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -32,6 +34,8 @@ public class CadastroActivity extends AppCompatActivity {
     private AlcoholBase selectedAlcoholType;
     private DrinkTemperature selectedTempType;
     private DrinkCategory selectedCategoryType;
+
+    private TextView txtDisplayBase, txtDisplayTemp, txtDisplaySize;
 
     protected void onCreate(Bundle savedInstanceState){
 
@@ -101,7 +105,9 @@ public class CadastroActivity extends AppCompatActivity {
                 int position = adapter.getPosition(drinkReceived.getDrinkTemperature());
                 spinTemp.setSelection(position);
             }
+            updateViewCategories();
         }
+
 
         Button buttonSaveCategories = dialog.findViewById(R.id.addCategoryButton);
         buttonSaveCategories.setOnClickListener(v-> {
@@ -116,6 +122,23 @@ public class CadastroActivity extends AppCompatActivity {
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    private void updateViewCategories() {
+        if (selectedAlcoholType != null && selectedAlcoholType != AlcoholBase.NON_TYPE) {
+            txtDisplayBase.setText(selectedAlcoholType.toString());
+            txtDisplayBase.setVisibility(View.VISIBLE);
+        }
+
+        if (selectedTempType != null && selectedTempType != DrinkTemperature.NON_TYPE) {
+            txtDisplayTemp.setText(selectedTempType.toString());
+            txtDisplayTemp.setVisibility(View.VISIBLE);
+        }
+
+        if (selectedCategoryType != null && selectedCategoryType != DrinkCategory.NON_TYPE) {
+            txtDisplaySize.setText(selectedCategoryType.toString());
+            txtDisplaySize.setVisibility(View.VISIBLE);
+        }
     }
 
     private boolean verifyCategories(){
@@ -144,6 +167,10 @@ public class CadastroActivity extends AppCompatActivity {
                     imagePhotoDrink.setImageURI(Uri.parse(drinkReceived.getPhoto()));
                     currentURIPhoto = drinkReceived.getPhoto();
                 }
+
+                selectedCategoryType = drinkReceived.getDrinkCategory();
+                selectedTempType = drinkReceived.getDrinkTemperature();
+                selectedCategoryType = drinkReceived.getDrinkCategory();
 
                 buttonSaveDrink.setText("Atualizar");
             }
@@ -176,6 +203,10 @@ public class CadastroActivity extends AppCompatActivity {
             drinkReceived.setAlcoholContent(alcoholContentD);
             drinkReceived.setRating(starReviewD);
             drinkReceived.setPhoto(currentURIPhoto);
+
+            drinkReceived.setAlcoholBase(selectedAlcoholType);
+            drinkReceived.setDrinkTemperature(selectedTempType);
+            drinkReceived.setDrinkCategory(selectedCategoryType);
 
             DrinksRepository.getInstance().editDrink(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
@@ -254,6 +285,10 @@ public class CadastroActivity extends AppCompatActivity {
         starReview = findViewById(R.id.reviewStarEditText);
         buttonSaveDrink = findViewById(R.id.saveButton);
         imagePhotoDrink = findViewById(R.id.addPhotoButton);
+
+        txtDisplayBase = findViewById(R.id.txtDisplayBase);
+        txtDisplayTemp = findViewById(R.id.txtDisplayTemp);
+        txtDisplaySize = findViewById(R.id.txtDisplaySize);
     }
 
     private void initializeLauncherPhoto(){

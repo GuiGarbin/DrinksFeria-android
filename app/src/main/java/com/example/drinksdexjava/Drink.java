@@ -77,11 +77,11 @@ public class Drink implements Serializable {
         this.photo = photoURL;
     }
 
-    public void setTypeTempDrink(DrinkTemperature drinkTemperature) { this.drinkTemperature = drinkTemperature; }
+    public void setDrinkTemperature(DrinkTemperature drinkTemperature) { this.drinkTemperature = drinkTemperature; }
 
-    public void setTypeCategoryDrink(DrinkCategory drinkCategory) { this.drinkCategory = drinkCategory; }
+    public void setDrinkCategory(DrinkCategory drinkCategory) { this.drinkCategory = drinkCategory; }
 
-    public void setTypeAlcoholDrink(AlcoholBase alcoholBase) { this.alcoholBase = alcoholBase; }
+    public void setAlcoholBase(AlcoholBase alcoholBase) { this.alcoholBase = alcoholBase; }
 
     public AlcoholBase getAlcoholBase() {
         return alcoholBase;
