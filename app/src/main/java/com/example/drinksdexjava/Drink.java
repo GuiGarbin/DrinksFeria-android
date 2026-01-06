@@ -82,4 +82,16 @@ public class Drink implements Serializable {
     public void setTypeCategoryDrink(DrinkCategory drinkCategory) { this.drinkCategory = drinkCategory; }
 
     public void setTypeAlcoholDrink(AlcoholBase alcoholBase) { this.alcoholBase = alcoholBase; }
+
+    public AlcoholBase getAlcoholBase() {
+        return alcoholBase;
+    }
+
+    public DrinkCategory getDrinkCategory() {
+        return drinkCategory;
+    }
+
+    public DrinkTemperature getDrinkTemperature() {
+        return drinkTemperature;
+    }
 }

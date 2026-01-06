@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -97,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
         TextView reviewStar = dialog.findViewById(R.id.detailsReviewStar);
         ImageView photo = dialog.findViewById(R.id.detailsPhoto);
 
+        TextView alcoholBase = dialog.findViewById(R.id.detailsAlcoholBase);
+        TextView drinkTemperature = dialog.findViewById(R.id.detailsDrinkTemperature);
+        TextView drinkCategory = dialog.findViewById(R.id.detailsDrinkCategory);
+
         name.setText(drink.getName());
         ingredients.setText(drink.getIngredients());
         recipe.setText(drink.getRecipe());
@@ -107,6 +113,24 @@ public class MainActivity extends AppCompatActivity {
         }
         alcoholContent.setText(String.format("%.1f%% vol", drink.getAlcoholContent()));
         reviewStar.setText(String.format("%.1f review", drink.getRating()));
+
+        if (drink.getAlcoholBase() != null) {
+            alcoholBase.setText(drink.getAlcoholBase().toString());
+        } else {
+            alcoholBase.setText("-");
+        }
+
+        if (drink.getDrinkTemperature() != null) {
+            drinkTemperature.setText(drink.getDrinkTemperature().toString());
+        } else {
+            drinkTemperature.setText("-");
+        }
+
+        if (drink.getDrinkCategory() != null) {
+            drinkCategory.setText(drink.getDrinkCategory().toString());
+        } else {
+            drinkCategory.setText("-");
+        }
         dialog.show();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.drinksdexjava;
 
 public enum DrinkTemperature {
+    NON_TYPE("Selecione a temperatura..."),
     HOT("Hot"),
     COLD("Cold"),
     FROZEN("Frozen"),

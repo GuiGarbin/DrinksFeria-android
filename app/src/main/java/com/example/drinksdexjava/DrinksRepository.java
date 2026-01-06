@@ -49,6 +49,7 @@ public class DrinksRepository {
 
     private void createFakeDrinks() {
         listDrinks = new ArrayList<>();
+        listDrinks.add(new Drink(0, "teste", "teste sério", "bater tudo", 12,null, 2, (AlcoholBase) AlcoholBase.GIN, (DrinkTemperature)DrinkTemperature.HOT, (DrinkCategory)DrinkCategory.LONG_DRINK));
         listDrinks.add(new Drink(1,"Caipirinha", "Limão e Cachaça","", 20, 4));
         listDrinks.add(new Drink(2,"Mojito", "Rum e Hortelã", "",15,  4));
         listDrinks.add(new Drink(3,"Gin Tônica", "Gin e Tônica", "",12,  4));

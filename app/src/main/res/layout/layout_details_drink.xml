@@ -75,5 +75,32 @@
         tools:text="Avalicao do drink..."
         app:layout_constraintTop_toBottomOf="@+id/detailsAlcoholConten"/>
 
+    <TextView
+        android:id="@+id/detailsAlcoholBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Base Alcoolica do Drink"
+        app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"/>
+
+    <TextView
+        android:id="@+id/detailsDrinkCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Categoria do Drink"
+        app:layout_constraintTop_toBottomOf="@+id/detailsAlcoholBase"/>
+
+    <TextView
+        android:id="@+id/detailsDrinkTemperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/main_text"
+        tools:text="Temperatura do Drink"
+        app:layout_constraintTop_toBottomOf="@+id/detailsDrinkCategory"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

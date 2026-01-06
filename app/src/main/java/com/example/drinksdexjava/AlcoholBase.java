@@ -1,6 +1,7 @@
 package com.example.drinksdexjava;
 
 public enum AlcoholBase {
+    NON_TYPE("Selecione a base alcoolica..."),
     VODKA("Vodka"),
     GIN("Gin"),
     RUM("Rum"),

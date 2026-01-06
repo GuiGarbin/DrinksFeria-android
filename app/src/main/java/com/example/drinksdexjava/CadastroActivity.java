@@ -85,15 +85,47 @@ public class CadastroActivity extends AppCompatActivity {
         configSpinner(spinTemp, DrinkTemperature.values());
         configSpinner(spinCategory, DrinkCategory.values());
 
+        if(drinkReceived!= null){
+            if (drinkReceived.getAlcoholBase() != null) {
+                ArrayAdapter adapter = (ArrayAdapter) spinAlcohol.getAdapter();
+                int position = adapter.getPosition(drinkReceived.getAlcoholBase());
+                spinAlcohol.setSelection(position);
+            }
+            if (drinkReceived.getDrinkCategory() != null) {
+                ArrayAdapter adapter = (ArrayAdapter) spinCategory.getAdapter();
+                int position = adapter.getPosition(drinkReceived.getDrinkCategory());
+                spinCategory.setSelection(position);
+            }
+            if (drinkReceived.getDrinkTemperature() != null) {
+                ArrayAdapter adapter = (ArrayAdapter) spinTemp.getAdapter();
+                int position = adapter.getPosition(drinkReceived.getDrinkTemperature());
+                spinTemp.setSelection(position);
+            }
+        }
+
         Button buttonSaveCategories = dialog.findViewById(R.id.addCategoryButton);
         buttonSaveCategories.setOnClickListener(v-> {
             selectedAlcoholType = (AlcoholBase) spinAlcohol.getSelectedItem();
             selectedCategoryType = (DrinkCategory) spinCategory.getSelectedItem();
             selectedTempType = (DrinkTemperature) spinTemp.getSelectedItem();
 
+            if(!verifyCategories()){
+                return;
+            }
+
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    private boolean verifyCategories(){
+        if(selectedAlcoholType==AlcoholBase.NON_TYPE ||
+                selectedCategoryType==DrinkCategory.NON_TYPE||
+                selectedTempType == DrinkTemperature.NON_TYPE) {
+            Toast.makeText(this, "Selecione todas as categorias", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 
