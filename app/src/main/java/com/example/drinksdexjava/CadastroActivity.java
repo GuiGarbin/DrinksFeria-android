@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class CadastroActivity extends AppCompatActivity {
     private AlcoholBase selectedAlcoholType;
     private DrinkTemperature selectedTempType;
     private DrinkCategory selectedCategoryType;
+    private TextView txtSummary;
 
     private TextView txtDisplayBase, txtDisplayTemp, txtDisplaySize;
 
@@ -72,7 +74,7 @@ public class CadastroActivity extends AppCompatActivity {
             builder.show();
         });
 
-        Button buttonAddCategories = findViewById(R.id.typeDrinkButton);
+        LinearLayout buttonAddCategories = findViewById(R.id.typeDrinkButtonLayout);
         buttonAddCategories.setOnClickListener(v-> {
             getCategories();
         });
@@ -89,23 +91,27 @@ public class CadastroActivity extends AppCompatActivity {
         configSpinner(spinTemp, DrinkTemperature.values());
         configSpinner(spinCategory, DrinkCategory.values());
 
-        if(drinkReceived!= null){
-            if (drinkReceived.getAlcoholBase() != null) {
+
+
+        if (drinkReceived != null || selectedAlcoholType != null) {
+
+            if (spinAlcohol.getAdapter() != null && selectedAlcoholType != null) {
                 ArrayAdapter adapter = (ArrayAdapter) spinAlcohol.getAdapter();
-                int position = adapter.getPosition(drinkReceived.getAlcoholBase());
-                spinAlcohol.setSelection(position);
+                int pos = adapter.getPosition(selectedAlcoholType);
+                if (pos >= 0) spinAlcohol.setSelection(pos);
             }
-            if (drinkReceived.getDrinkCategory() != null) {
+
+            if (spinCategory.getAdapter() != null && selectedCategoryType != null) {
                 ArrayAdapter adapter = (ArrayAdapter) spinCategory.getAdapter();
-                int position = adapter.getPosition(drinkReceived.getDrinkCategory());
-                spinCategory.setSelection(position);
+                int pos = adapter.getPosition(selectedCategoryType);
+                if (pos >= 0) spinCategory.setSelection(pos);
             }
-            if (drinkReceived.getDrinkTemperature() != null) {
+
+            if (spinTemp.getAdapter() != null && selectedTempType != null) {
                 ArrayAdapter adapter = (ArrayAdapter) spinTemp.getAdapter();
-                int position = adapter.getPosition(drinkReceived.getDrinkTemperature());
-                spinTemp.setSelection(position);
+                int pos = adapter.getPosition(selectedTempType);
+                if (pos >= 0) spinTemp.setSelection(pos);
             }
-            updateViewCategories();
         }
 
 
@@ -118,6 +124,12 @@ public class CadastroActivity extends AppCompatActivity {
             if(!verifyCategories()){
                 return;
             }
+
+            String resume = selectedAlcoholType.toString() + " . " +
+                    selectedCategoryType.toString() + " . " +
+                    selectedTempType.toString();
+
+            txtSummary.setText(resume);
 
             dialog.dismiss();
         });
@@ -286,9 +298,12 @@ public class CadastroActivity extends AppCompatActivity {
         buttonSaveDrink = findViewById(R.id.saveButton);
         imagePhotoDrink = findViewById(R.id.addPhotoButton);
 
-        txtDisplayBase = findViewById(R.id.txtDisplayBase);
-        txtDisplayTemp = findViewById(R.id.txtDisplayTemp);
-        txtDisplaySize = findViewById(R.id.txtDisplaySize);
+//        txtDisplayBase = findViewById(R.id.txtDisplayBase);
+//        txtDisplayTemp = findViewById(R.id.txtDisplayTemp);
+//        txtDisplaySize = findViewById(R.id.txtDisplaySize);
+
+        txtSummary = findViewById(R.id.txtCategoriesSummary);
+
     }
 
     private void initializeLauncherPhoto(){

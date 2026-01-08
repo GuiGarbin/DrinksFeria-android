@@ -25,7 +25,7 @@
         android:src="@drawable/ic_edit"
         android:backgroundTint="@color/back_button"
         android:tint="@color/card_item_color"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
@@ -33,7 +33,7 @@
         android:id="@+id/detailsName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="46sp"
         android:textStyle="bold"
         android:textColor="@color/main_text"
         tools:text="Nome do Drink"
@@ -59,48 +59,55 @@
 
     <TextView
         android:id="@+id/detailsAlcoholConten"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
         tools:text="Teor Alcoolico..."
-        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/detailsReviewStar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
         tools:text="Avalicao do drink..."
-        app:layout_constraintTop_toBottomOf="@+id/detailsAlcoholConten"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"/>
 
     <TextView
         android:id="@+id/detailsAlcoholBase"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Base Alcoolica do Drink"
-        app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/detailsDrinkCategory"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Categoria do Drink"
-        app:layout_constraintTop_toBottomOf="@+id/detailsAlcoholBase"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"
+        app:layout_constraintStart_toEndOf="@+id/detailsAlcoholBase"/>
 
     <TextView
         android:id="@+id/detailsDrinkTemperature"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Temperatura do Drink"
-        app:layout_constraintTop_toBottomOf="@+id/detailsDrinkCategory"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"
+        app:layout_constraintStart_toEndOf="@+id/detailsDrinkCategory"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
