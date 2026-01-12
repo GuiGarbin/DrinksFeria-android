@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText ingredients;
     private EditText recipe;
     private EditText alcoholContent;
-    private EditText starReview;
+    private RatingBar starReview;
     private ImageView imagePhotoDrink;
     private Drink drinkReceived = null;
     private Button buttonSaveDrink;
@@ -173,7 +174,7 @@ public class CadastroActivity extends AppCompatActivity {
                 ingredients.setText(drinkReceived.getIngredients());
                 recipe.setText(drinkReceived.getRecipe());
                 alcoholContent.setText(String.valueOf(drinkReceived.getAlcoholContent()));
-                starReview.setText(String.valueOf(drinkReceived.getRating()));
+                starReview.setRating(drinkReceived.getRating());
 
                 if(drinkReceived.getPhoto()!=null){
                     imagePhotoDrink.setImageURI(Uri.parse(drinkReceived.getPhoto()));
@@ -182,7 +183,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                 selectedCategoryType = drinkReceived.getDrinkCategory();
                 selectedTempType = drinkReceived.getDrinkTemperature();
-                selectedCategoryType = drinkReceived.getDrinkCategory();
+                selectedAlcoholType = drinkReceived.getAlcoholBase();
 
                 buttonSaveDrink.setText("Atualizar");
             }
@@ -202,11 +203,8 @@ public class CadastroActivity extends AppCompatActivity {
         if(!alcoholContentText.isEmpty()){
             alcoholContentD = Double.parseDouble(alcoholContentText);
         }
-        String starReviwText = starReview.getText().toString();
         float starReviewD = 0;
-        if(!starReviwText.isEmpty()){
-            starReviewD = Float.parseFloat(starReviwText);
-        }
+        starReviewD = starReview.getRating();
 
         if(drinkReceived!=null){
             drinkReceived.setName(nameD);
@@ -275,17 +273,12 @@ public class CadastroActivity extends AppCompatActivity {
             alcoholContent.requestFocus();
             return false;
         }
-        String starReviewText = starReview.getText().toString().replace(",", ".").trim();
-        if (starReviewText.isEmpty()) {
-            starReview.setError("Campo obrigatório"); // Ou defina como 0 se preferir
-            starReview.requestFocus();
+
+        if (starReview.getRating() == 0) {
+            Toast.makeText(this, "Dê uma nota para o drink!", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(Float.parseFloat(starReview.getText().toString())<0||Float.parseFloat(starReview.getText().toString())>5){
-            starReview.setError("Valor deve estar entre 0 e 5");
-            starReview.requestFocus();
-            return false;
-        }
+
         return true;
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void configRecyclerView(){
         recyclerViewDrinks = findViewById(R.id.drinksRecyclerView);//vincula a variavel no recyclerView dos xml
-        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);//cria um formato pra lista
         recyclerViewDrinks.setLayoutManager(new LinearLayoutManager(this));//aplica a ordem criada
         drinkAdapter = new DrinkAdapter(listDrinks, this::showDetails);//cria variavel q carrega os drinks
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         TextView ingredients = dialog.findViewById(R.id.detailsIngredients);
         TextView recipe = dialog.findViewById(R.id.detailRecipe);
         TextView alcoholContent = dialog.findViewById(R.id.detailsAlcoholConten);
-        TextView reviewStar = dialog.findViewById(R.id.detailsReviewStar);
+        RatingBar reviewStar = dialog.findViewById(R.id.detailsReviewStar);
         ImageView photo = dialog.findViewById(R.id.detailsPhoto);
 
         TextView alcoholBase = dialog.findViewById(R.id.detailsAlcoholBase);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             photo.setImageResource(R.drawable.baseline_local_drink_24);
         }
         alcoholContent.setText(String.format("%.1f%% vol", drink.getAlcoholContent()));
-        reviewStar.setText(String.format("%.1f review", drink.getRating()));
+        reviewStar.setRating(drink.getRating());
 
         if (drink.getAlcoholBase() != null) {
             alcoholBase.setText(drink.getAlcoholBase().toString());
