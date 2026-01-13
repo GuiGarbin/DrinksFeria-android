@@ -38,7 +38,6 @@ public class CadastroActivity extends AppCompatActivity {
     private DrinkCategory selectedCategoryType;
     private TextView txtSummary;
 
-    private TextView txtDisplayBase, txtDisplayTemp, txtDisplaySize;
 
     protected void onCreate(Bundle savedInstanceState){
 
@@ -51,13 +50,13 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     private void configButton(){
-        ImageButton buttonBack = findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(v->{
-            finish();
+        ImageButton buttonBack = findViewById(R.id.buttonBack);//cria botao pra voltar tela
+        buttonBack.setOnClickListener(v->{//configura clique no botao
+            finish();//fecha a tela, fazendo voltar pra tela anterior
         });
 
-        buttonSaveDrink.setOnClickListener(v->{
-            saveDrink();
+        buttonSaveDrink.setOnClickListener(v->{//configura clique no botao
+            saveDrink();//chama a funcao pra salvar o drink
         });
 
         imagePhotoDrink.setOnClickListener(v-> {
@@ -137,24 +136,7 @@ public class CadastroActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void updateViewCategories() {
-        if (selectedAlcoholType != null && selectedAlcoholType != AlcoholBase.NON_TYPE) {
-            txtDisplayBase.setText(selectedAlcoholType.toString());
-            txtDisplayBase.setVisibility(View.VISIBLE);
-        }
-
-        if (selectedTempType != null && selectedTempType != DrinkTemperature.NON_TYPE) {
-            txtDisplayTemp.setText(selectedTempType.toString());
-            txtDisplayTemp.setVisibility(View.VISIBLE);
-        }
-
-        if (selectedCategoryType != null && selectedCategoryType != DrinkCategory.NON_TYPE) {
-            txtDisplaySize.setText(selectedCategoryType.toString());
-            txtDisplaySize.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private boolean verifyCategories(){
+    private boolean verifyCategories(){//verifica se foram selecionadas as categorias na dialog, por isso uma funcao separada
         if(selectedAlcoholType==AlcoholBase.NON_TYPE ||
                 selectedCategoryType==DrinkCategory.NON_TYPE||
                 selectedTempType == DrinkTemperature.NON_TYPE) {
@@ -166,10 +148,10 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     private void editDrink(){
-        Intent intent = getIntent();
-        if(intent.hasExtra("editDrink")){
-            drinkReceived = (Drink) intent.getSerializableExtra("editDrink");
-            if(drinkReceived!=null){
+        Intent intent = getIntent();//cria a intent
+        if(intent.hasExtra("editDrink")){//confere se foi a intent de edicao
+            drinkReceived = (Drink) intent.getSerializableExtra("editDrink");//recebe o drink passado pela intent
+            if(drinkReceived!=null){//se possuir drink, seta as inforcoes do drink pros edittexts
                 name.setText(drinkReceived.getName());
                 ingredients.setText(drinkReceived.getIngredients());
                 recipe.setText(drinkReceived.getRecipe());
@@ -185,16 +167,17 @@ public class CadastroActivity extends AppCompatActivity {
                 selectedTempType = drinkReceived.getDrinkTemperature();
                 selectedAlcoholType = drinkReceived.getAlcoholBase();
 
-                buttonSaveDrink.setText("Atualizar");
+                buttonSaveDrink.setText("Atualizar");//muda o nome do botao de salvar
             }
         }
     }
 
     private void saveDrink(){
-        if(!validateData()){
+        if(!validateData()){//valida se as edittexts foram preenchidas
             return;
         }
 
+        //pega oq esta nas edittexts, transforma em string e limpa os espacos em branco
         String nameD = name.getText().toString().trim();
         String ingredientsD = ingredients.getText().toString().trim();
         String recipeD = recipe.getText().toString().trim();
@@ -206,7 +189,8 @@ public class CadastroActivity extends AppCompatActivity {
         float starReviewD = 0;
         starReviewD = starReview.getRating();
 
-        if(drinkReceived!=null){
+        if(drinkReceived!=null){//verifica se o drink veio pra edicao ou criacao
+            //edicao cai aqui e refaz as informacoes
             drinkReceived.setName(nameD);
             drinkReceived.setIngredients(ingredientsD);
             drinkReceived.setRecipe(recipeD);
@@ -220,8 +204,9 @@ public class CadastroActivity extends AppCompatActivity {
 
             DrinksRepository.getInstance().editDrink(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
-        } else {
-            int id = DrinksRepository.getInstance().getSize();
+        } else {//criacao cai aqui
+            int id = DrinksRepository.getInstance().getSize();//cria o id pro drink
+            //faz o novo objeto com as informacoes recebidas
             Drink newDrink = new Drink(id,
                     nameD,
                     ingredientsD,
@@ -234,14 +219,14 @@ public class CadastroActivity extends AppCompatActivity {
                     selectedCategoryType
             );
 
-            DrinksRepository.getInstance().addDrink(newDrink);
-            Toast.makeText(this, "Drink criado", Toast.LENGTH_SHORT).show();
+            DrinksRepository.getInstance().addDrink(newDrink);//chama o repository pra adicionar o drink
+            Toast.makeText(this, "Drink criado", Toast.LENGTH_SHORT).show();//informa o usuario q o drink foi criado
 
         }
-        finish();
+        finish();//fecha a tela
     }
 
-    private boolean validateData(){
+    private boolean validateData(){//valida se as informacoes foram escritas e se sao validas
         if(currentURIPhoto ==null){
             Toast.makeText(this,"Selecione uma imagem para o drink", Toast.LENGTH_SHORT).show();
             imagePhotoDrink.requestFocus();
@@ -290,13 +275,7 @@ public class CadastroActivity extends AppCompatActivity {
         starReview = findViewById(R.id.reviewStarEditText);
         buttonSaveDrink = findViewById(R.id.saveButton);
         imagePhotoDrink = findViewById(R.id.addPhotoButton);
-
-//        txtDisplayBase = findViewById(R.id.txtDisplayBase);
-//        txtDisplayTemp = findViewById(R.id.txtDisplayTemp);
-//        txtDisplaySize = findViewById(R.id.txtDisplaySize);
-
         txtSummary = findViewById(R.id.txtCategoriesSummary);
-
     }
 
     private void initializeLauncherPhoto(){

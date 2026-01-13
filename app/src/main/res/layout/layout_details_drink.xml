@@ -31,13 +31,14 @@
 
     <TextView
         android:id="@+id/detailsName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="46sp"
         android:textStyle="bold"
         android:textColor="@color/main_text"
         tools:text="Nome do Drink"
-        app:layout_constraintTop_toBottomOf="@+id/detailsPhoto"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailsPhoto"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/detailsIngredients"
@@ -58,34 +59,22 @@
         app:layout_constraintTop_toBottomOf="@+id/detailsIngredients"/>
 
     <TextView
-        android:id="@+id/detailsAlcoholConten"
+        android:id="@+id/detailsAlcoholContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:textColor="@color/main_text"
-        tools:text="Teor Alcoolico..."
-        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsPhoto"
+        tools:text="Teor Alcoolico..." />
 
-<!--    <TextView-->
-<!--        android:id="@+id/detailsReviewStar"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:drawableStart="@drawable/img_drink"-->
-<!--        android:drawableTint="@color/back_button"-->
-<!--        android:textColor="@color/main_text"-->
-<!--        tools:text="Avalicao do drink..."-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/detailRecipe"-->
-<!--        app:layout_constraintStart_toStartOf="parent"/>-->
 
     <RatingBar
         android:id="@+id/detailsReviewStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:isIndicator="true"
         android:layout_marginTop="8dp"
         android:progressTint="@color/back_button"
-        android:textColor="@color/main_text"
         tools:text="Avalicao do drink..."
         app:layout_constraintTop_toBottomOf="@+id/detailRecipe"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -95,7 +84,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Base Alcoolica do Drink"
         app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"
@@ -106,7 +94,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Categoria do Drink"
         app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"
@@ -117,7 +104,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/bg_rounded_gray"
         android:textColor="@color/main_text"
         tools:text="Temperatura do Drink"
         app:layout_constraintTop_toBottomOf="@+id/detailsReviewStar"

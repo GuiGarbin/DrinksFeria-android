@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveDrink(Drink d){
-        DrinksRepository.getInstance().addDrink(d);
-        drinkAdapter.notifyItemInserted(listDrinks.size()-1);
+        DrinksRepository.getInstance().addDrink(d);//pega o repository de drinks e adiciona o drink novo
+        drinkAdapter.notifyItemInserted(listDrinks.size()-1);//avisa q o novo drink foi adicionado
     }
 
     @Override
@@ -81,32 +81,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showDetails(Drink drink){
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
-        dialog.setContentView(R.layout.layout_details_drink);
+        BottomSheetDialog dialog = new BottomSheetDialog(this);//cria a dialog dos detalhes
+        dialog.setContentView(R.layout.layout_details_drink);//mostra a tela dos detalhes
 
-        FloatingActionButton editbutton = dialog.findViewById(R.id.editButton);
-        editbutton.setOnClickListener(v->{
-            Intent intent = new Intent(this, CadastroActivity.class);
-            intent.putExtra("editDrink", drink);
-            addDrinkLauncher.launch(intent);
-            dialog.dismiss();
+        FloatingActionButton editbutton = dialog.findViewById(R.id.editButton);//cria o botao de editar
+        editbutton.setOnClickListener(v->{//configura o clique do botao
+            Intent intent = new Intent(this, CadastroActivity.class);//cria a intent pra transportar dados
+            intent.putExtra("editDrink", drink);//cria a correlacao do objeto e a string pro outro lado
+            addDrinkLauncher.launch(intent);//chama o launcher pra abrir a outra tela
+            dialog.dismiss();//fecha a dialog
         });
 
+        //cria as variaveis da tela de detalhes
         TextView name = dialog.findViewById(R.id.detailsName);
         TextView ingredients = dialog.findViewById(R.id.detailsIngredients);
         TextView recipe = dialog.findViewById(R.id.detailRecipe);
-        TextView alcoholContent = dialog.findViewById(R.id.detailsAlcoholConten);
+        TextView alcoholContent = dialog.findViewById(R.id.detailsAlcoholContent);
         RatingBar reviewStar = dialog.findViewById(R.id.detailsReviewStar);
         ImageView photo = dialog.findViewById(R.id.detailsPhoto);
-
         TextView alcoholBase = dialog.findViewById(R.id.detailsAlcoholBase);
         TextView drinkTemperature = dialog.findViewById(R.id.detailsDrinkTemperature);
         TextView drinkCategory = dialog.findViewById(R.id.detailsDrinkCategory);
 
+        //seta os dados do drink na tela de detalhes
         name.setText(drink.getName());
         ingredients.setText(drink.getIngredients());
         recipe.setText(drink.getRecipe());
-        if(drink.getPhoto()!=null){
+        if(drink.getPhoto()!=null){//confere se tem foto ou nao
             photo.setImageURI(Uri.parse(drink.getPhoto()));
         } else {
             photo.setImageResource(R.drawable.baseline_local_drink_24);
@@ -114,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
         alcoholContent.setText(String.format("%.1f%% vol", drink.getAlcoholContent()));
         reviewStar.setRating(drink.getRating());
 
+        //confere se as categorias foram selecionadas
         if (drink.getAlcoholBase() != null) {
-            alcoholBase.setText(drink.getAlcoholBase().toString());
+            alcoholBase.setText(drink.getAlcoholBase().toString()+" . ");
         } else {
             alcoholBase.setText("-");
         }
@@ -127,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (drink.getDrinkCategory() != null) {
-            drinkCategory.setText(drink.getDrinkCategory().toString());
+            drinkCategory.setText(drink.getDrinkCategory().toString()+" . ");
         } else {
             drinkCategory.setText("-");
         }
-        dialog.show();
+        dialog.show();//mostra a dialog de detalhes
     }
 }
