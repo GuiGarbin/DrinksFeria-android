@@ -37,6 +37,7 @@ public class CadastroActivity extends AppCompatActivity {
     private DrinkTemperature selectedTempType;
     private DrinkCategory selectedCategoryType;
     private TextView txtSummary;
+    private DrinksRepository repository;
 
 
     protected void onCreate(Bundle savedInstanceState){
@@ -202,12 +203,11 @@ public class CadastroActivity extends AppCompatActivity {
             drinkReceived.setDrinkTemperature(selectedTempType);
             drinkReceived.setDrinkCategory(selectedCategoryType);
 
-            DrinksRepository.getInstance().editDrink(drinkReceived);
+            repository.update(drinkReceived);
             Toast.makeText(this, "Drink atualizado", Toast.LENGTH_SHORT).show();
         } else {//criacao cai aqui
-            int id = DrinksRepository.getInstance().getSize();//cria o id pro drink
             //faz o novo objeto com as informacoes recebidas
-            Drink newDrink = new Drink(id,
+            Drink newDrink = new Drink(0,
                     nameD,
                     ingredientsD,
                     recipeD,
@@ -219,7 +219,7 @@ public class CadastroActivity extends AppCompatActivity {
                     selectedCategoryType
             );
 
-            DrinksRepository.getInstance().addDrink(newDrink);//chama o repository pra adicionar o drink
+            repository.insert(newDrink);//chama o repository pra adicionar o drink
             Toast.makeText(this, "Drink criado", Toast.LENGTH_SHORT).show();//informa o usuario q o drink foi criado
 
         }
@@ -276,6 +276,7 @@ public class CadastroActivity extends AppCompatActivity {
         buttonSaveDrink = findViewById(R.id.saveButton);
         imagePhotoDrink = findViewById(R.id.addPhotoButton);
         txtSummary = findViewById(R.id.txtCategoriesSummary);
+        repository = new DrinksRepository(getApplication());
     }
 
     private void initializeLauncherPhoto(){

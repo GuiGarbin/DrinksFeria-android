@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,13 +19,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewDrinks;
     private DrinkAdapter drinkAdapter;
-    private List<Drink> listDrinks;
     ActivityResultLauncher<Intent> addDrinkLauncher;
+    private DrinksRepository repository;
 
 
     @Override
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);//inicializa o app
         setContentView(R.layout.activity_main);//chama a tela inicial
         initializeLauncher();
-        listDrinks = DrinksRepository.getInstance().listDrink();
         configRecyclerView();//chama a funcao que configura a recycler view
         configButton();//chama a funcao que configura os botoes
     }
@@ -48,8 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private void configRecyclerView(){
         recyclerViewDrinks = findViewById(R.id.drinksRecyclerView);//vincula a variavel no recyclerView dos xml
         recyclerViewDrinks.setLayoutManager(new LinearLayoutManager(this));//aplica a ordem criada
-        drinkAdapter = new DrinkAdapter(listDrinks, this::showDetails);//cria variavel q carrega os drinks
+        drinkAdapter = new DrinkAdapter(new ArrayList<>(), this::showDetails);//cria variavel q carrega os drinks
         recyclerViewDrinks.setAdapter(drinkAdapter);//manda os drinks pra recyclerView mostrar
+        repository = new DrinksRepository(getApplication());
+        repository.getAllDrinks().observe(this, new Observer<List<Drink>>() {
+            @Override
+            public void onChanged(List<Drink> drinks) {
+                drinkAdapter.setDrinks(drinks);
+            }
+        });
     }
 
     private void initializeLauncher(){
@@ -69,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveDrink(Drink d){
-        DrinksRepository.getInstance().addDrink(d);//pega o repository de drinks e adiciona o drink novo
-        drinkAdapter.notifyItemInserted(listDrinks.size()-1);//avisa q o novo drink foi adicionado
+        repository.insert(d);//pega o repository de drinks e adiciona o drink novo
     }
 
     @Override

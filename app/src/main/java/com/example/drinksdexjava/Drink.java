@@ -1,8 +1,13 @@
 package com.example.drinksdexjava;
 
 import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "table_drink")
 public class Drink implements Serializable {
+    @PrimaryKey(autoGenerate = true)
 
     private int id;
     private String name;
@@ -18,7 +23,7 @@ public class Drink implements Serializable {
 
     // Construtor
     public Drink(int id,
-                 String name,
+                String name,
                  String ingredients,
                  String recipe,
                  double alcoholContent,
@@ -27,7 +32,7 @@ public class Drink implements Serializable {
                  AlcoholBase alcoholBase,
                  DrinkTemperature drinkTemperature,
                  DrinkCategory drinkCategory) {
-        this.id = id;
+        this.id=id;
         this.name = name;
         this.ingredients = ingredients;
         this.recipe = recipe;
@@ -41,6 +46,7 @@ public class Drink implements Serializable {
 
     //CONSTRUTOR PRA TESTE DA LISTA INICIAL DE DRINKS
     //EXCLUIR NA VERSAO FINAL
+    @Ignore
     public Drink(int id, String name, String ingredients, String recipe, double alcoholContent, float rating) {
         this.id = id;
         this.name = name;
