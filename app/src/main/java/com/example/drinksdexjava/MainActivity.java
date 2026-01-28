@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -65,19 +66,10 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result-> {
                     if(result.getResultCode()== MainActivity.RESULT_OK){
-                        Intent data = result.getData();
 
-                        if(data!=null){
-                            Drink newDrink = (Drink) data.getSerializableExtra("Drink cadastrado");
-                            saveDrink(newDrink);
-                        }
                     }
                 }
         );
-    }
-
-    private void saveDrink(Drink d){
-        repository.insert(d);//pega o repository de drinks e adiciona o drink novo
     }
 
     @Override
@@ -97,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("editDrink", drink);//cria a correlacao do objeto e a string pro outro lado
             addDrinkLauncher.launch(intent);//chama o launcher pra abrir a outra tela
             dialog.dismiss();//fecha a dialog
+        });
+
+        FloatingActionButton deleteButton = dialog.findViewById(R.id.deletButton);
+        deleteButton.setOnClickListener(v-> {
+            repository.delete(drink);
+            dialog.dismiss();
+            Toast.makeText(this, "Drink excluído", Toast.LENGTH_SHORT).show();
         });
 
         //cria as variaveis da tela de detalhes
