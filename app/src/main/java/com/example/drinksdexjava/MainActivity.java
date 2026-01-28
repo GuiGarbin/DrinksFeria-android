@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -92,10 +93,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FloatingActionButton deleteButton = dialog.findViewById(R.id.deletButton);
-        deleteButton.setOnClickListener(v-> {
-            repository.delete(drink);
-            dialog.dismiss();
-            Toast.makeText(this, "Drink excluído", Toast.LENGTH_SHORT).show();
+        deleteButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Excluir Drink")
+                    .setMessage("Tem certeza que deseja apagar o " + drink.getName() + "?")
+                    .setPositiveButton("Sim", (dialogInterface, i) -> {
+                        repository.delete(drink);
+                        dialog.dismiss(); // Fecha o BottomSheet
+                        Toast.makeText(this, "Drink excluído", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Não", null)
+                    .show();
         });
 
         //cria as variaveis da tela de detalhes
